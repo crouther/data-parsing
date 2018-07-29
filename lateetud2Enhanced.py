@@ -5,7 +5,7 @@
 hasNum = []
 hasDate = []
 talksAboutMoney = []
-figures = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", ","]
+figures = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", ",", " "]
 array = []
 dates = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
@@ -29,8 +29,18 @@ for x in range(len(array)):
     #Check if line has date
     for y in range(len(dates)):
         month = str(dates[y])
+        
         if month in line:
-            hasDate.append(array[x])
+            datePlace = line.index(month) + len(month) - 1
+            day = str(line)
+            
+            #Loops through string starting at $, stops at nondigit
+            for z in range(datePlace+1, len(day)):
+                if day[z] in figures:
+                    continue
+                else:
+                    hasDate.append(day[line.index(month):z])
+                    break
 
     #Checks if line talks about money     
     if "$" in line:
@@ -38,11 +48,11 @@ for x in range(len(array)):
         word = str(line)
 
         #Loops through string starting at $, stops at nondigit
-        for z in range(num+1, len(word)):
-            if word[z] in figures:
+        for a in range(num+1, len(word)):
+            if word[a] in figures:
                 continue
             else:
-                talksAboutMoney.append(word[num:z])
+                talksAboutMoney.append(word[num:a])
                 break
 
 #Opens & Saves arrays to output files
@@ -58,15 +68,16 @@ for z in hasNum:
 file.write("\n")
 file.write("Lines with dates: ")
 file.write("\n")
-for a in hasDate:
-    file.write(a)
+for b in hasDate:
+    file.write(b)
+    file.write("\n")
 
 #Prints dollar values to output file
 file.write("\n")
 file.write("Lines with dollar signs: ")
 file.write("\n")
-for b in talksAboutMoney:
-    file.write(b)
+for c in talksAboutMoney:
+    file.write(c)
     file.write("\n")
 
 file.close()
