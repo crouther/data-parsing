@@ -29,7 +29,8 @@ for x in range(len(array)):
     #Check if line has date
     for y in range(len(dates)):
         month = str(dates[y])
-        
+
+        #Verfies if line contains a month
         if month in line:
             datePlace = line.index(month) + len(month) - 1
             day = str(line)
@@ -55,18 +56,12 @@ for x in range(len(array)):
                 talksAboutMoney.append(word[num:a])
                 break
 
+
 #Opens & Saves arrays to output files
 file = open("lateetud2Output.txt", "w")
-file.write("Lines with numbers : ")
-file.write("\n")
-
-#Prints Has Number array to output file
-for z in hasNum:
-    file.write(z)
 
 #Prints lines with dates to output file
-file.write("\n")
-file.write("Lines with dates: ")
+file.write("Dates: ")
 file.write("\n")
 for b in hasDate:
     file.write(b)
@@ -74,13 +69,22 @@ for b in hasDate:
 
 #Prints dollar values to output file
 file.write("\n")
-file.write("Lines with dollar signs: ")
+file.write("$ Amounts: ")
 file.write("\n")
 for c in talksAboutMoney:
     file.write(c)
     file.write("\n")
 
+#Prints Has Number array to output file
+file.write("\n")
+file.write("Numbers: ")
+file.write("\n")
+
+for z in hasNum:
+    file.write(z)
+
 file.close()
+
 
 #Print list
 print("Lines with numbers listed below: ")
