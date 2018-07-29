@@ -5,6 +5,7 @@
 hasNum = []
 hasDate = []
 talksAboutMoney = []
+figures = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", ","]
 array = []
 dates = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
@@ -33,26 +34,40 @@ for x in range(len(array)):
 
     #Checks if line talks about money     
     if "$" in line:
-        talksAboutMoney.append(array[x])
+        num = line.index("$")
+        word = str(line)
 
+        #Loops through string starting at $, stops at nondigit
+        for z in range(num+1, len(word)):
+            if word[z] in figures:
+                continue
+            else:
+                talksAboutMoney.append(word[num:z])
+                break
+
+#Opens & Saves arrays to output files
 file = open("lateetud2Output.txt", "w")
 file.write("Lines with numbers : ")
 file.write("\n")
 
+#Prints Has Number array to output file
 for z in hasNum:
     file.write(z)
 
+#Prints lines with dates to output file
 file.write("\n")
 file.write("Lines with dates: ")
 file.write("\n")
 for a in hasDate:
     file.write(a)
-    
+
+#Prints dollar values to output file
 file.write("\n")
 file.write("Lines with dollar signs: ")
 file.write("\n")
 for b in talksAboutMoney:
     file.write(b)
+    file.write("\n")
 
 file.close()
 
