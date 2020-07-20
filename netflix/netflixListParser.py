@@ -5,7 +5,7 @@
 #
 ################################################################################
 
-import re
+import re, json
 
 # Variables
 
@@ -44,5 +44,10 @@ for y in range(0,len(array)):
 			extractedTxt.append(findTitle(array[y],temp[z]))
 
 
-# Prints My List in Text Form (Title's Only)
+# Prints My List in Text Form (Title's Only) to console
 print(extractedTxt)
+
+
+# Save Data (Netflix Titles) formatted to json file
+with open('data.json', 'w', encoding='utf-8') as f:
+    json.dump(extractedTxt, f, ensure_ascii=False, indent=4)
